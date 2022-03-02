@@ -1,0 +1,8 @@
+﻿  Functions.cpp
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\Functions.cpp(300,33): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\Functions.cpp(304,27): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  menu.cpp
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.cpp(66,44): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  menu_itmm.cpp
+  Создание кода...
+  menu_itmm.vcxproj -> C:\Users\gamesense\Desktop\menu recode\menu_itmm\x64\Debug\menu_itmm.exe

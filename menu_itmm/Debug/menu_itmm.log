@@ -1,0 +1,33 @@
+﻿  menu.cpp
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(11,13): error C3646: name: неизвестный спецификатор переопределения
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(11,13): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(12,20): error C3646: description: неизвестный спецификатор переопределения
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(12,20): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(14,6): error C2061: синтаксическая ошибка: идентификатор "string"
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(20,17): error C3646: title: неизвестный спецификатор переопределения
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(20,17): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(21,11): error C2143: синтаксическая ошибка: отсутствие ";" перед "<"
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(21,11): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(21,23): error C2238: непредвиденные лексемы перед ";"
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(26,29): error C2061: синтаксическая ошибка: идентификатор "string"
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.cpp(9,45): error C2511: item::item(std::string,std::string): перегруженная функция-член не найдена в "item"
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(9): message : см. объявление "item"
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.cpp(21,41): error C2660: menu::create_item: функция не принимает 2 аргументов
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(26,10): message : см. объявление "menu::create_item"
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.cpp(25,1): error C2511: item menu::create_item(std::string,std::string): перегруженная функция-член не найдена в "menu"
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(17): message : см. объявление "menu"
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.cpp(26,33): error C2661: item::item: нет перегруженной функции, принимающей 2 аргументов
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.cpp(28,5): error C2671: menu::create_item: статические функции-члены не имеют указателей "this"
+  menu_itmm.cpp
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(11,13): error C3646: name: неизвестный спецификатор переопределения
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(11,13): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(12,20): error C3646: description: неизвестный спецификатор переопределения
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(12,20): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(14,6): error C2061: синтаксическая ошибка: идентификатор "string"
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(20,17): error C3646: title: неизвестный спецификатор переопределения
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(20,17): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(21,11): error C2143: синтаксическая ошибка: отсутствие ";" перед "<"
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(21,11): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(21,23): error C2238: непредвиденные лексемы перед ";"
+C:\Users\gamesense\Desktop\menu recode\menu_itmm\menu.h(26,29): error C2061: синтаксическая ошибка: идентификатор "string"
+  Создание кода...

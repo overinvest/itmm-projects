@@ -3,10 +3,12 @@
 #include <string>
 
 using namespace std;
-void summing(int* a, int size, int &sum) {
+int summing(int* a, int size) {
+	int sum = 0;
 	for (int i = 0; i < size; i++) {
 		sum += a[i];
 	}
+	return sum;
 }
 
 void min_number(int* a, int size, int &l, int &min) {
@@ -27,7 +29,7 @@ void otbor_elem(string* a, int size, char param, string* &result, int &k) {
 	}
 }
 
-void linear_search(string* dst, int size, string source, int &idx) {
+int linear_search(string* dst, int size, string source) {
 	int index = -1;
 	int i = 0;
 
@@ -40,10 +42,10 @@ void linear_search(string* dst, int size, string source, int &idx) {
 		i++;
 	}
 
-	idx = index;
+	return index;
 }
 
-void binary_search(string* dst, int size, string source, int& idx) {
+int binary_search(string* dst, int size, string source) {
 	int start = 0;
 	int finish = size - 1;
 	int index = -1;
@@ -65,7 +67,7 @@ void binary_search(string* dst, int size, string source, int& idx) {
 			start = middle + 1;
 	}
 
-	idx = index;
+	return index;
 
 }
 

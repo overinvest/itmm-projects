@@ -16,11 +16,9 @@ void Algoritm1() {
 	cout << "¬ведите числа" << endl;
 	A = new int[N];
 	for (int i = 0; i < N; i++) {
-		cin >> B;
-		A[i] = B;
+		cin >> A[i];
 	}
-	sum = 0;
-	summing(A, N, sum);
+	sum = summing(A, N);
 
 	cout << sum << endl;
 }
@@ -69,9 +67,7 @@ void Algoritm3() {
 
 	cout << "¬ведите элементы" << endl;
 	for (int i = 0; i < N; i++) {
-		getline(cin, buffer);
-
-		A[i] = buffer;
+		cin >> A[i];
 	}
 
 	cout << "¬ведите букву" << endl;
@@ -104,15 +100,13 @@ void Algoritm4() {
 
 	cout << "¬ведите элементы" << endl;
 	for (int i = 0; i < N; i++) {
-		getline(cin, buffer);
-
-		A[i] = buffer;
+		cin >> A[i];
 	}
 
 	cout << "¬ведите искомое слово" << endl;
-	getline(cin, str);
+	cin >> str;
 
-	linear_search(A, N, str, idx);
+	idx = linear_search(A, N, str);
 
 	cout << "Ћинейный поиск " << idx << endl;
 
@@ -133,15 +127,13 @@ void Algoritm5() {
 
 	cout << "¬ведите элементы" << endl;
 	for (int i = 0; i < N; i++) {
-		getline(cin, buffer);
-
-		A[i] = buffer;
+		cin >> A[i];
 	}
 
 	cout << "¬ведите искомое слово" << endl;
-	getline(cin, str);
+	cin >> str;
 
-	binary_search(A, N, str, idx);
+	idx = binary_search(A, N, str);
 
 	cout << "Ћинейный поиск " << idx << endl;
 
@@ -157,14 +149,13 @@ void Algoritm6()
 	cout << "¬ведите количество элементов" << endl;
 	cin >> N;
 
-	name = new string[N];
-	list = new string[N];
+	name = new string[N + 1];
+	list = new string[N + 1];
 
 	cout << "¬ведите элементы" << endl;
 
 	for (int i = 0; i < N; i++) {
-		getline(cin, buffer);
-		name[i] = buffer;
+		cin >> name[i];
 	}
 
 	k = 0;
@@ -187,15 +178,14 @@ void Algoritm7()
 	cout << "¬ведите количество элементов" << endl;
 	cin >> N;
 
-	name = new string[N];
-	list = new string[N];
-	Rate = new int[N];
+	name = new string[N + 1];
+	list = new string[N + 1];
+	Rate = new int[N + 1];
 
 	cout << "¬ведите элементы" << endl;
 
-	for (int i = 0; i < N + 1; i++) {
-		getline(cin, buffer);
-		name[i] = buffer;
+	for (int i = 0; i < N; i++) {
+		cin >> name[i];
 	}
 
 	k = 0;
@@ -220,16 +210,15 @@ void Algoritm8()
 	cout << "¬ведите количество элементов" << endl;
 	cin >> N;
 
-	name = new string[N];
-	list = new string[N];
-	CH = new int[N];
-	Sum = new int[N];
+	name = new string[N + 1];
+	list = new string[N + 1];
+	CH = new int[N + 1];
+	Sum = new int[N + 1];
 
 	cout << "¬ведите элементы" << endl;
 
-	for (int i = 0; i < N + 1; i++) {
-		getline(cin, buffer);
-		name[i] = buffer;
+	for (int i = 0; i < N; i++) {
+		cin >> name[i];
 		cin >> B;
 		CH[i] = B;
 	}

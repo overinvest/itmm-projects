@@ -4,7 +4,6 @@
 #include <chrono>
 #include <Windows.h>
 #include "menu.h"
-#include "d3d9.h"
 
 void localize() {
 	setlocale(LC_ALL, "rus");

@@ -11,7 +11,7 @@ void localize() {
 	SetConsoleOutputCP(1251);
 }
 
-void string_split_smart(string str, string razd, string* &result, int& count) {
+void string_split_smart(string str, string razd, string*& result, int& count) {
 	for (int i = 0; i < str.length(); i++) {
 		int l = razd.find(str[i]);
 		if (l < 0 || l > razd.length()) {
@@ -24,7 +24,7 @@ void string_split_smart(string str, string razd, string* &result, int& count) {
 				}
 			}
 			else {
- 				result[++count] = str[i];
+				result[++count] = str[i];
 			}
 		}
 	}
@@ -130,14 +130,18 @@ public:
 	}
 
 	Complex operator/(Complex comp) {
-		double sum_sqrt = comp.GetMod();
+		double sum_sqrt = (double)(comp.real * comp.real + comp.im * comp.im);
 
 		if (sum_sqrt == 0.f) {
 			cout << "Деление на 0 невозможно, попробуйте ввести другое число" << endl;
 			return Complex();
 		}
 		else {
-			return Complex((real_f * comp.real_f + im_f * comp.im_f) / sum_sqrt, (real_f * comp.im_f - comp.im_f * im_f) / sum_sqrt);
+
+			double new_real = (double)(real * comp.real + im * comp.im);
+			double new_im = (double)(real * comp.im - comp.real * im);
+
+			return Complex(new_real / sum_sqrt, new_im / sum_sqrt);
 		}
 
 	}
@@ -147,32 +151,32 @@ public:
 		string reals;
 		string ims;
 
-		if (ceil(comp.real_f) > comp.real) {
+		if ((double)ceil(comp.real_f) - comp.real_f > 0) {
 			reals = to_string(comp.real_f);
 		}
 		else {
 			reals = to_string(comp.real);
 		}
 
-		if (ceil(comp.im_f) > comp.im) {
+		if ((double)ceil(comp.im_f) - comp.im_f > 0) {
 			ims = to_string(comp.im_f);
 		}
 		else {
 			ims = to_string(comp.im);
 		}
 
-		if (comp.real_f != 0.0) {
-			if (comp.im_f > 1.0) {
+		if (comp.real_f != 0.f) {
+			if (comp.im_f > 1.f) {
 				out << reals << "+" << ims << "i";
 			}
-			else if (comp.im_f < -1.0) {
+			else if (comp.im_f < -1.f) {
 				out << reals << ims << "i";
 			}
 			else {
-				if (comp.im_f > 0.0) {
+				if (comp.im_f > 0.f) {
 					out << reals << "+i";
 				}
-				else if (comp.im_f < 0.0) {
+				else if (comp.im_f < 0.f) {
 					out << reals << "-i";
 				}
 				else {
@@ -182,15 +186,16 @@ public:
 		}
 		else {
 
-			if (abs(comp.im_f) == 1.0) {
-				if (comp.im_f > 0.0) {
+			if (abs(comp.im_f) == 1.f) {
+				if (comp.im_f > 0.f) {
 					out << "i";
-				} else {
+				}
+				else {
 					out << "-i";
 				}
 			}
 			else {
-				if (comp.im_f == 0.0) {
+				if (comp.im_f == 0.f) {
 					out << 0;
 				}
 				else {

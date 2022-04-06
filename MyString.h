@@ -48,6 +48,25 @@ public:
 			mem[i] = tmp.mem[i];
 		}
 	};
+	MyString(int num)
+    {
+        size = 128;
+        count = 0;
+        char tmp;
+        mem = new char[size];
+        /*char nums[] = {'0','1','2','3','4','5','6','7','8','9'};*/
+        while (num > 0)
+        {
+            mem[count++] = num / 10 + 48;
+            num /= 10;
+        }
+        for (int i = 0; i < count || 2; i++)
+        {
+            tmp = mem[i];
+            mem[i] = mem[count - 1 - i];
+            mem[count - 1 - i] = tmp;
+        }
+    }
 	MyString &operator=(MyString tmp) {
 		if (size != tmp.size) {
 			if (size != 0) {
@@ -190,5 +209,56 @@ public:
 
 		return l;
 	}
+	int operator == (MyString tmp)
+    {
+        int result = 0; //сравнимые строки одинаковы
+        if (count != tmp.count)
+        {
+            int result = -1;
+        }
+        else
+        {
+            for(int i = 0; i < count && result == 0; i++)
+            {
+                if (mem[i] != tmp.mem[i])
+                {
+                    result = -1;
+                }
+            }
+        }
+        return result;
+    }
+	int operator > (MyString tmp)
+    {
+        int result = 0;
+        for (int i = 0; i < count && i < tmp.count; i++)
+        {
+            if (mem[i] > tmp.mem[i])
+            {
+                result = -1;
+            }
+            if (count > tmp.count)
+            {
+                result = -1;
+            }
+        }
+        return result;
+    }
+    int operator < (MyString tmp)
+    {
+        int result = 0;
+        for (int i = 0; i < count && i < tmp.count; i++)
+        {
+            if (mem[i] < tmp.mem[i])
+            {
+                result = -1;
+            }
+            if (count < tmp.count)
+            {
+                result = -1;
+            }
+        }
+        return result;
+    }
 };
 

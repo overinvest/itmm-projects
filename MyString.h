@@ -57,10 +57,13 @@ public:
         /*char nums[] = {'0','1','2','3','4','5','6','7','8','9'};*/
         while (num > 0)
         {
-            mem[count++] = num / 10 + 48;
+			int char_number = num % 10 + 48;
+            mem[count++] = char_number;
+
             num /= 10;
         }
-        for (int i = 0; i < count || 2; i++)
+
+        for (int i = 0; i < count; i++)
         {
             tmp = mem[i];
             mem[i] = mem[count - 1 - i];
@@ -211,10 +214,10 @@ public:
 	}
 	int operator == (MyString tmp)
     {
-        int result = 0; //сравнимые строки одинаковы
+        int result = 1; //сравнимые строки одинаковы
         if (count != tmp.count)
         {
-            int result = -1;
+            int result = 0;
         }
         else
         {
@@ -222,7 +225,7 @@ public:
             {
                 if (mem[i] != tmp.mem[i])
                 {
-                    result = -1;
+                    result = 0;
                 }
             }
         }
@@ -260,5 +263,14 @@ public:
         }
         return result;
     }
+
+	friend ostream& operator<<(ostream& out, MyString& str) {
+
+		for (int i = 0; i < str.GetCount(); i++) {
+			out << str[i];
+		}
+
+		return out;
+	}
 };
 

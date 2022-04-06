@@ -21,6 +21,7 @@ int main()
     MyString B;
     MyString C(A);
     MyString D("FYTGBU");
+    MyString F(123);
 
     for (int i = 0; i < A.GetCount(); i++) {
         cout << A[i];
@@ -89,6 +90,19 @@ int main()
         cout << C[i];
     }
     cout << endl;
+
+    C = A;
+
+    if (C == A) {
+        cout << "C == A" << endl;
+    }
+    else {
+        cout << "C != A" << endl;
+    }
+
+    cout << "F = " << F << endl;
+
+    cout << 1 << " == " << (int)('1') << endl;
 
     return 0;
 }

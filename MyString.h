@@ -49,28 +49,28 @@ public:
 		}
 	};
 	MyString(int num)
-    {
-        size = 128;
-        count = 0;
-        char tmp;
-        mem = new char[size];
-        /*char nums[] = {'0','1','2','3','4','5','6','7','8','9'};*/
-        while (num > 0)
-        {
+	{
+		size = 128;
+		count = 0;
+		char tmp;
+		mem = new char[size];
+		/*char nums[] = {'0','1','2','3','4','5','6','7','8','9'};*/
+		while (num > 0)
+		{
 			int char_number = num % 10 + 48;
-            mem[count++] = char_number;
+			mem[count++] = char_number;
 
-            num /= 10;
-        }
+			num /= 10;
+		}
 
-        for (int i = 0; i < count; i++)
-        {
-            tmp = mem[i];
-            mem[i] = mem[count - 1 - i];
-            mem[count - 1 - i] = tmp;
-        }
-    }
-	MyString &operator=(MyString tmp) {
+		for (int i = 0; i < count; i++)
+		{
+			tmp = mem[i];
+			mem[i] = mem[count - 1 - i];
+			mem[count - 1 - i] = tmp;
+		}
+	}
+	MyString& operator=(MyString tmp) {
 		if (size != tmp.size) {
 			if (size != 0) {
 				delete[]mem;
@@ -87,6 +87,25 @@ public:
 
 		return *this;
 	};
+
+	MyString& operator=(string tmp) {
+		if (size != tmp.size()) {
+			if (size != 0) {
+				delete[]mem;
+			}
+
+			size = tmp.size();
+			mem = new char[size];
+		}
+
+		count = tmp.length();
+		for (int i = 0; i < count; i++) {
+			mem[i] = tmp[i];
+		}
+
+		return *this;
+	};
+
 	int GetCount() {
 		return this->count;
 	}
@@ -126,7 +145,8 @@ public:
 	void del(int start, int _count) {
 		if (start < 0) {
 			this->count = 0;
-		}else if (start < this->count) {
+		}
+		else if (start < this->count) {
 			for (int i = 0; i < this->count - start; i++) {
 				mem[start + i] = mem[start + _count + i];
 			}
@@ -153,6 +173,25 @@ public:
 		}
 
 		int new_count = count + tmp.count;
+
+		MyString new_str(str, new_count);
+
+		return new_str;
+	}
+	MyString operator+(string tmp) {
+		char* str;
+
+		str = new char[count + tmp.length()];
+
+		for (int i = 0; i < count; i++) {
+			str[i] = mem[i];
+		}
+
+		for (int i = 0; i < tmp.length(); i++) {
+			str[i + count] = tmp[i];
+		}
+
+		int new_count = count + tmp.length();
 
 		MyString new_str(str, new_count);
 
@@ -212,57 +251,119 @@ public:
 
 		return l;
 	}
+
+	void string_split_smart(MyString razd, MyString*& result, int& new_count) {
+		for (int i = 0; i < count; i++) {
+			int l = razd.find(mem[i]);
+			if (l < 0 || l > razd.count) {
+				result[new_count] = result[new_count] + mem[i];
+			}
+			else {
+				if (mem[i] == ' ') {
+					if (result[new_count] != "") {
+						result[++new_count] = "";
+					}
+				}
+				else {
+					if (result[new_count] != "") {
+						new_count++;
+					}
+					result[new_count] = mem[i];
+					result[++new_count] = "";
+				}
+			}
+		}
+	}
+
 	int operator == (MyString tmp)
-    {
-        int result = 1; //сравнимые строки одинаковы
-        if (count != tmp.count)
-        {
-            int result = 0;
-        }
-        else
-        {
-            for(int i = 0; i < count && result == 0; i++)
-            {
-                if (mem[i] != tmp.mem[i])
-                {
-                    result = 0;
-                }
-            }
-        }
-        return result;
-    }
+	{
+		int result = 1; //сравнимые строки одинаковы
+		if (count != tmp.count)
+		{
+			int result = 0;
+		}
+		else
+		{
+			for (int i = 0; i < count && result == 0; i++)
+			{
+				if (mem[i] != tmp.mem[i])
+				{
+					result = 0;
+				}
+			}
+		}
+		return result;
+	}
+	int operator == (string tmp)
+	{
+		int result = 1; //сравнимые строки одинаковы
+		if (count != tmp.length())
+		{
+			int result = 0;
+		}
+		else
+		{
+			for (int i = 0; i < count && result == 0; i++)
+			{
+				if (mem[i] != tmp[i])
+				{
+					result = 0;
+				}
+			}
+		}
+		return result;
+	}
+	int operator != (string tmp)
+	{
+		int result = 0; //сравнимые строки одинаковы
+		if (count != tmp.length())
+		{
+			int result = 1;
+		}
+		else
+		{
+			for (int i = 0; i < count && result == 0; i++)
+			{
+				if (mem[i] != tmp[i])
+				{
+					result = 1;
+				}
+			}
+		}
+		return result;
+	}
 	int operator > (MyString tmp)
-    {
-        int result = 0;
-        for (int i = 0; i < count && i < tmp.count; i++)
-        {
-            if (mem[i] > tmp.mem[i])
-            {
-                result = -1;
-            }
-            if (count > tmp.count)
-            {
-                result = -1;
-            }
-        }
-        return result;
-    }
-    int operator < (MyString tmp)
-    {
-        int result = 0;
-        for (int i = 0; i < count && i < tmp.count; i++)
-        {
-            if (mem[i] < tmp.mem[i])
-            {
-                result = -1;
-            }
-            if (count < tmp.count)
-            {
-                result = -1;
-            }
-        }
-        return result;
-    }
+	{
+		int result = 0;
+		for (int i = 0; i < count && i < tmp.count; i++)
+		{
+			if (mem[i] > tmp.mem[i])
+			{
+				result = -1;
+			}
+			if (count > tmp.count)
+			{
+				result = -1;
+			}
+		}
+		return result;
+	}
+	int operator < (MyString tmp)
+	{
+		int result = 0;
+		for (int i = 0; i < count && i < tmp.count; i++)
+		{
+			if (mem[i] < tmp.mem[i])
+			{
+				result = -1;
+			}
+			if (count < tmp.count)
+			{
+				result = -1;
+			}
+		}
+		return result;
+	}
 
 	friend ostream& operator<<(ostream& out, MyString& str) {
 
@@ -273,4 +374,3 @@ public:
 		return out;
 	}
 };
-

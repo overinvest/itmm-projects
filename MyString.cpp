@@ -1,4 +1,4 @@
-﻿// MyString.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+// MyString.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
 #include <iostream>
@@ -17,11 +17,21 @@ int main()
 {
     localize();
 
-    MyString A("ABCerdctfvgb");
+    MyString A(" z.ad iuqw.asd , ..qw. da");
     MyString B;
     MyString C(A);
     MyString D("FYTGBU");
     MyString F(123);
+    int count = 0;
+    MyString* data;
+
+    data = new MyString[A.GetCount()];
+
+    A.string_split_smart(MyString("+-*.., "), data, count);
+
+    for (int i = 0; i < count; i++) {
+        cout << data[i] << endl;
+    }
 
     for (int i = 0; i < A.GetCount(); i++) {
         cout << A[i];

@@ -72,6 +72,24 @@ void TBitField::Add(unsigned int k, unsigned int u_size)
 	mem[m] = mem[m] | (1 << pos);
 }
 
+int TBitField::GetNumSize(unsigned int u_size) {
+
+	int _size = 0;
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < (sizeof(unsigned int) * 8); j++) {
+			int k = i * (sizeof(unsigned int) * 8) + j + 1;
+			if (k <= u_size) {
+				if (mem[i] & (1 << j)) {
+					_size++;
+				}
+
+			}
+		}
+	}
+
+	return _size;
+}
+
 std::string TBitField::TBitFieldToString(unsigned int u_size)
 {
 	std::string STR = "";

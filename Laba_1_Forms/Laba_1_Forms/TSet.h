@@ -20,5 +20,6 @@ public:
 	TSet operator&(TSet tmp);
 	TSet operator|(TSet tmp);
 	TSet operator~();
+	int GetSize();
 };
 

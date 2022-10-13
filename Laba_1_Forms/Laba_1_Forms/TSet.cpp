@@ -67,3 +67,7 @@ TSet TSet::operator~()
 	res.TB = ~TB;
 	return res;
 }
+
+int TSet::GetSize() {
+	return TB.GetNumSize(u_size);
+}

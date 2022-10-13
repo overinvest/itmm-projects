@@ -19,6 +19,7 @@ private:
 
 public:
 	void Add(unsigned int k, unsigned int u_size);
+	int GetNumSize(unsigned int u_size);
 	std::string TBitFieldToString(unsigned int u_size);
 	void del(unsigned int k, unsigned int u_size);
 	TBitField operator&(TBitField tmp);

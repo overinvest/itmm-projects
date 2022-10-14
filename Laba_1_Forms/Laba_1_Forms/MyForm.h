@@ -826,23 +826,23 @@ namespace Laba1Forms {
 			}
 		}
 
-		System::Array^ A_data = this->textBox2->Text->Split(' ');
-		int current_size = A_data->Length;
+		System::Array^ B_data = this->textBox3->Text->Split(' ');
+		int current_size = B_data->Length;
 
 		for (int i = 0; i < current_size; i++) {
-			System::Object^ val = A_data->GetValue(i);
+			System::Object^ val = B_data->GetValue(i);
 
 			bool is_int = true;
 
 			try {
-				Convert::ToInt64(A_data->GetValue(i));
+				Convert::ToInt64(B_data->GetValue(i));
 			}
 			catch (...) {
 				is_int = false;
 			}
 
 			if (is_int) {
-				B.Add(Convert::ToInt64(A_data->GetValue(i)));
+				B.Add(Convert::ToInt64(B_data->GetValue(i)));
 				ChangeVisibleFunctionsButtons(true);
 				ChangeVisibleB(true);
 				ChangeVisibleResult(true);

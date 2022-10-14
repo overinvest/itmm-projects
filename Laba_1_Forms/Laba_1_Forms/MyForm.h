@@ -37,6 +37,8 @@ namespace Laba1Forms {
 	TSet A;
 	TSet B;
 
+	bool manual_change = false;
+
 	/// <summary>
 	/// Сводка для MyForm
 	/// </summary>
@@ -149,10 +151,10 @@ namespace Laba1Forms {
 			// 
 			this->textBox2->Location = System::Drawing::Point(69, 100);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->ReadOnly = true;
 			this->textBox2->Size = System::Drawing::Size(330, 29);
 			this->textBox2->TabIndex = 2;
 			this->textBox2->Visible = false;
+			this->textBox2->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox2_TextChanged);
 			this->textBox2->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::textBox2_KeyPress);
 			// 
 			// label2
@@ -183,10 +185,10 @@ namespace Laba1Forms {
 			// 
 			this->textBox3->Location = System::Drawing::Point(69, 179);
 			this->textBox3->Name = L"textBox3";
-			this->textBox3->ReadOnly = true;
 			this->textBox3->Size = System::Drawing::Size(330, 29);
 			this->textBox3->TabIndex = 4;
 			this->textBox3->Visible = false;
+			this->textBox3->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox3_TextChanged);
 			this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::textBox3_KeyPress);
 			// 
 			// button1
@@ -387,6 +389,9 @@ namespace Laba1Forms {
 		}
 #pragma endregion
 
+		public: System::String^ prev_A = "";
+		public: System::String^ prev_B = "";
+
 		private: void ChangeVisible(bool vis) {
 			this->textBox2->Visible = vis;
 			this->label2->Visible = vis;
@@ -432,11 +437,11 @@ namespace Laba1Forms {
 		}
 
 		private: void ChangeVisibleFunctionsButtons(bool vis) {
-			this->textBox2->Visible = vis && A.GetSize() > 0;
-			this->label2->Visible = vis && A.GetSize() > 0;
+			this->textBox2->Visible = vis;
+			this->label2->Visible = vis;
 
-			this->label3->Visible = vis && B.GetSize() > 0;
-			this->textBox3->Visible = vis && B.GetSize() > 0;
+			this->label3->Visible = vis;
+			this->textBox3->Visible = vis;
 
 			this->button1->Visible = vis && A.GetSize() > 0 && B.GetSize() > 0;
 			this->button2->Visible = vis && A.GetSize() > 0 && B.GetSize() > 0;
@@ -463,6 +468,16 @@ namespace Laba1Forms {
 			this->label6->Visible = vis && B.GetSize() > 0;
 		}
 
+		private: bool contains(System::Array^ data, System::Object^ val) {
+
+			for (int i = 0; i < data->Length; i++) {
+				if (data->GetValue(i) == val) {
+					return true;
+				}
+			}
+			return false;
+		}
+
 		private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 
 			ChangeVisible(false);
@@ -470,6 +485,7 @@ namespace Laba1Forms {
 			if (this->textBox1->Text != "") {
 
 				ChangeVisibleAdditionButtons(true);
+				ChangeVisibleFunctionsButtons(true);
 
 				u_size = Convert::ToInt64(this->textBox1->Text);
 
@@ -576,6 +592,8 @@ namespace Laba1Forms {
 		if (this->textBox5->Text->Length == 0)
 			return;
 
+		manual_change = true;
+
 		this->textBox2->Text = "";
 
 		A.Add(Convert::ToInt64(this->textBox5->Text));
@@ -597,6 +615,8 @@ namespace Laba1Forms {
 			}
 		}
 
+		prev_A = this->textBox2->Text;
+
 		ChangeVisibleFunctionsButtons(true);
 		ChangeVisibleA(true);
 		ChangeVisibleResult(true);
@@ -605,6 +625,8 @@ namespace Laba1Forms {
 
 		if (this->textBox5->Text->Length == 0)
 			return;
+
+		manual_change = true;
 
 		this->textBox2->Text = "";
 
@@ -646,6 +668,8 @@ namespace Laba1Forms {
 		if (this->textBox6->Text->Length == 0)
 			return;
 
+		manual_change = true;
+
 		this->textBox3->Text = "";
 
 		B.Add(Convert::ToInt64(this->textBox6->Text));
@@ -675,6 +699,8 @@ namespace Laba1Forms {
 
 		if (this->textBox6->Text->Length == 0)
 			return;
+
+		manual_change = true;
 
 		this->textBox3->Text = "";
 
@@ -719,6 +745,109 @@ namespace Laba1Forms {
 		}
 
 		ChangeVisibleResult(true);
+	}
+	private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+
+		if (manual_change) {
+			manual_change = false;
+			return;
+		}
+
+		string res = A.TSetToString();
+		if (res.length() > 0) {
+			string* splitted;
+			int count = 0;
+
+			splitted = new string[res.length() / 2 + 2];
+
+			splitted[0] = "";
+
+			string_split_smart(res, " ", splitted, count);
+
+			for (int i = 0; i < count + 1; i++) {
+				if (splitted[i] != "") {
+					A.Del(atoi(splitted[i].c_str()));
+					ChangeVisibleFunctionsButtons(true);
+					ChangeVisibleA(true);
+					ChangeVisibleResult(true);
+				}
+			}
+		}
+
+		System::Array^ A_data = this->textBox2->Text->Split(' ');
+		int current_size = A_data->Length;
+
+		for (int i = 0; i < current_size; i++) {
+			System::Object^ val = A_data->GetValue(i);
+
+			bool is_int = true;
+
+			try {
+				Convert::ToInt64(A_data->GetValue(i));
+			}
+			catch (...) {
+				is_int = false;
+			}
+
+			if (is_int) {
+				A.Add(Convert::ToInt64(A_data->GetValue(i)));
+				ChangeVisibleFunctionsButtons(true);
+				ChangeVisibleA(true);
+				ChangeVisibleResult(true);
+			}
+		}
+
+	}
+	private: System::Void textBox3_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+
+		if (manual_change) {
+			manual_change = false;
+			return;
+		}
+
+		string res = B.TSetToString();
+		if (res.length() > 0) {
+			string* splitted;
+			int count = 0;
+
+			splitted = new string[res.length() / 2 + 2];
+
+			splitted[0] = "";
+
+			string_split_smart(res, " ", splitted, count);
+
+			for (int i = 0; i < count + 1; i++) {
+				if (splitted[i] != "") {
+					B.Del(atoi(splitted[i].c_str()));
+					ChangeVisibleFunctionsButtons(true);
+					ChangeVisibleB(true);
+					ChangeVisibleResult(true);
+				}
+			}
+		}
+
+		System::Array^ A_data = this->textBox2->Text->Split(' ');
+		int current_size = A_data->Length;
+
+		for (int i = 0; i < current_size; i++) {
+			System::Object^ val = A_data->GetValue(i);
+
+			bool is_int = true;
+
+			try {
+				Convert::ToInt64(A_data->GetValue(i));
+			}
+			catch (...) {
+				is_int = false;
+			}
+
+			if (is_int) {
+				B.Add(Convert::ToInt64(A_data->GetValue(i)));
+				ChangeVisibleFunctionsButtons(true);
+				ChangeVisibleB(true);
+				ChangeVisibleResult(true);
+			}
+		}
 	}
 };
 }
